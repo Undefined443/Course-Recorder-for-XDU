@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "colors": "^1.4.0",
+    "js-yaml": "^4.1.0",
+    "readline-sync": "^1.4.10"
+  },
+  "name": "lecture-recordings",
+  "version": "1.0.0",
+  "description": "记录超星录直播课程中的课程链接，以及下载录播视频",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "李潇",
+  "license": "ISC"
+}

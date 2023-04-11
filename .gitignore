@@ -1,0 +1,12 @@
+**/node_modules/
+__pycache__/
+/**/.DS_Store
+chromedriver
+.venv/
+.idea/
+backup/
+records/*
+!records/config.yaml
+!records/course.sh
+!records/course.ps1
+**/*.mov

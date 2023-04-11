@@ -1,0 +1,17 @@
+**/__pycache__/
+**/.venv/
+**/node_modules/
+**/.idea/
+backup/
+**/.DS_Store
+**/.gitignore
+**/.dockerignore
+**/requirements.txt
+Dockerfile
+compose.yaml
+README.md
+**/build.sh
+**/course.sh
+.git/
+records/
+

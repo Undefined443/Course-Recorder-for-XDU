@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+gevent = "*"
+tqdm = "*"
+httpx = {extras = ["http2"], version = "*"}
+selenium = "*"
+m3u8 = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
