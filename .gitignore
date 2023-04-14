@@ -10,3 +10,5 @@ records/*
 !records/course.sh
 !records/course.ps1
 **/*.mov
+**/*.icloud
+
