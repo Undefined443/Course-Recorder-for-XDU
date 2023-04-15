@@ -1,9 +1,9 @@
 **/node_modules/
-__pycache__/
-/**/.DS_Store
-chromedriver
-.venv/
-.idea/
+**/__pycache__/
+**/.venv/
+**/.idea/
+**/.DS_Store
+**/chromedriver
 backup/
 records/*
 !records/config.yaml
@@ -11,4 +11,3 @@ records/*
 !records/course.ps1
 **/*.mov
 **/*.icloud
-

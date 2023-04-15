@@ -28,4 +28,6 @@ COPY --from=build /app/nodejs/ /app/nodejs/
 COPY --from=build /app/python/ /app/python/
 COPY ./ /app/
 WORKDIR /app/nodejs/
+LABEL org.opencontainers.image.source https://github.com/undefined443/course-recorder-for-xdu
 CMD index.js help
+

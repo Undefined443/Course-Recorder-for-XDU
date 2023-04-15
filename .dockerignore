@@ -1,12 +1,10 @@
+**/node_modules/
 **/__pycache__/
 **/.venv/
-**/node_modules/
 **/.idea/
-backup/
 **/.DS_Store
-**/.gitignore
-**/.dockerignore
-**/requirements.txt
+**/chromedriver
+backup/
 Dockerfile
 compose.yaml
 README.md
@@ -14,4 +12,5 @@ README.md
 **/course.sh
 .git/
 records/
-
+**/.gitignore
+**/.dockerignore
