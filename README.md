@@ -12,7 +12,9 @@ winget install --id Microsoft.Powershell --source winget
 
 另外，为了最好的使用体验，建议你安装 `pasteboard`。
 
-如果你已经安装了 `scoop`，那么可以用 `scoop` 安装：
+如果你已经安装了 [`scoop`](https://scoop.sh/)，那么可以用 `scoop` 安装：
+
+> `scoop` 是 Windows 上的第三方包管理器
 
 ```powershell
 scoop bucket add extras
