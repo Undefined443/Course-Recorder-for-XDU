@@ -68,11 +68,11 @@ rj: 软件体系结构
 ```sh
 ./course sf 5-2 $(pbpaste)  # 记录一节算法课，课程标记为 5-2-1，课程 JSON 通过命令替换从剪贴板读出
 
-./course show web ls  # 查看已记录的算法课，输出为课程的标记
+./course show sf ls  # 查看已记录的算法课，输出为课程的标记
 
-./course show web 5-2  # 查看已记录的算法课中标记为 5-2 的所有课程的 URL
+./course show sf 5-2  # 查看已记录的算法课中标记为 5-2 的所有课程的 URL
 
-./course download web 5-2  # 下载算法课中标记为 5-2 的所有课程
+./course download sf 5-2  # 下载算法课中标记为 5-2 的所有课程
 ```
 
 > 对于 macOS/Linux 用户，运行脚本时需加上后缀 `.sh`，即：`./course.sh`
