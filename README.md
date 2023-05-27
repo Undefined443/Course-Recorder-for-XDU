@@ -76,7 +76,7 @@ rj: 软件体系结构
 ```
 
 > 对于 macOS/Linux 用户，运行脚本时需加上后缀 `.sh`，即：`./course.sh`
-> 
+>
 > 每个记录的课程 URL 都必须有一个标记，如 `5-2-1`，表示这节课是第五周星期二的课程。所有在第五周星期二上的这门课的 URL 都会放到一个数组中，后面的 `1` 是这个课程 URL 在数组中的索引（数组索引从 1 开始）。在记录、查看和下载课程时可以省略索引，此时程序会在后台自动补充索引。
 
 ## Troubleshooting
@@ -87,7 +87,7 @@ rj: 软件体系结构
 
 ### 无法执行脚本
 
-![](assets/Troubleshooting-1.png)
+![troubleshooting-1](assets/Troubleshooting-1.png)
 
 解决方法：`Unblock-File course.ps1`，然后重新执行脚本。
 
