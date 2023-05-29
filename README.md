@@ -87,10 +87,13 @@ rj: 软件体系结构
 
 ### 无法执行脚本
 
-![troubleshooting-1](assets/Troubleshooting-1.png)
+![troubleshooting-1](assets/troubleshooting-1.png)
 
 解决方法：`Unblock-File course.ps1`，然后重新执行脚本。
 
-### 其他
+### 无法下载 Docker 镜像
 
-如果是网络问题，请挂代理或更换节点，出站规则选择`规则判断`。
+![troubleshooting-2](assets/troubleshooting-2.png)
+
+解决方法：网络问题，请关闭代理或更换代理节点。
+
