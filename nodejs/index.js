@@ -431,7 +431,7 @@ function download(file, courseID) {
         }
       }
       fs.unlinkSync(inputfile);
-      console.log("==> " + "Successfully downloaded".green + `${courseName}${courseClass}.mp4`);
+      console.log("==> " + "Successfully downloaded ".green + `${courseName}${courseClass}.mp4`);
     }
   }
 }
