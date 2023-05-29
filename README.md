@@ -97,3 +97,9 @@ rj: 软件体系结构
 
 解决方法：网络问题，请关闭代理或更换代理节点。
 
+### 下载视频时报错：httpx.ReadTimeout: timed out
+
+![troubleshooting-3](assets/troubleshooting-3.png)
+
+超星的锅，你只能再多尝试几次。
+
