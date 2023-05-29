@@ -414,19 +414,24 @@ function download(file, courseID) {
       // 创建视频列表文件
       let inputfile = `.${courseName}${courseClass}.txt`;
       fs.writeFileSync(inputfile, fileList, "utf8");
-      spawnSync("ls", ["-a"], { stdio: "inherit" });
       // 使用 ffmpeg 合并视频
+      console.log("==> " + "Merging videos...".green);
       let outfile = `${downloadDirectory}/${courseName}${courseClass}.mp4`;
-      spawnSync("ffmpeg", ["-f", "concat", "-safe", 0, "-i", inputfile, "-c", "copy", outfile], { stdio: 'inherit' });
-      // 删除文件
-      for (let url of data[courseClass]) {
-        if (url) {
-          let index = data[courseClass].indexOf(url) + 1;
-          let fileName = `${courseName}${courseClass}-${index}.mp4`;
-          fs.unlinkSync(`${downloadDirectory}/${fileName}`);
+      let child = spawnSync("ffmpeg", ["-f", "concat", "-safe", 0, "-i", inputfile, "-c", "copy", outfile, "-y"]);
+      if (child.status !== 0) {  // 判断子进程返回值
+        console.log("==> " + "Error\n".red + "\t" + child.stderr.toString());  // 合并失败，报错
+      } else {
+        // 合并成功，删除文件
+        for (let url of data[courseClass]) {
+          if (url) {
+            let index = data[courseClass].indexOf(url) + 1;
+            let fileName = `${courseName}${courseClass}-${index}.mp4`;
+            fs.unlinkSync(`${downloadDirectory}/${fileName}`);
+          }
         }
       }
       fs.unlinkSync(inputfile);
+      console.log("==> " + "Successfully downloaded".green + `${courseName}${courseClass}.mp4`);
     }
   }
 }
