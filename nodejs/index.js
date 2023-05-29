@@ -2,7 +2,9 @@ const color = require("colors")
 const spawnSync = require("child_process").spawnSync;
 const readlineSync = require("readline-sync");
 const fs = require("fs");
+const os = require("os");
 const yaml = require("js-yaml");
+const { writeFile } = require("fs/promises");
 const resolve = require("path").resolve;
 
 const PROJECT_ROOT = resolve(__dirname, "..");
@@ -364,6 +366,10 @@ function parseJSON(s, option) {
 
 function download(file, courseID) {
   let data = readData(`${RECORDS_DIR}/${file}`);
+  if (!data) {
+    console.log("==> " + "Error\n".red + "\tNo data");
+    process.exit(1);
+  }
   if (data === "fileNotFound") {
     console.log("==> " + "Error\n".red + "\tFile not found: " + file);
     process.exit(1);
@@ -389,10 +395,38 @@ function download(file, courseID) {
     }
   } else {
     // 如果没有指定课程序号，则下载该课程类别下的所有课程视频
+    let courseName = file.slice(0, file.indexOf("."));
+    let fileArray = [];
+    let fileList = "";
+    let downloadDirectory = `${os.homedir()}/Downloads`;
     for (let url of data[courseClass]) {
       if (url) {
-        spawnSync(PYTHON_PATH, [PYTHON_MAIN, "download", url, file.slice(0, file.indexOf(".")) + courseClass + "-" + (data[courseClass].indexOf(url) + 1) + ".mp4"], { stdio: 'inherit' });
+        let index = data[courseClass].indexOf(url) + 1;
+        let fileName = `${courseName}${courseClass}-${index}.mp4`;
+        spawnSync(PYTHON_PATH, [PYTHON_MAIN, "download", url, fileName], { stdio: 'inherit' });
+        fileArray.push(`${downloadDirectory}/${fileName}`);
+        fileList += `file '${downloadDirectory}/${fileName}'\n`;
       }
+    }
+    // 尝试合并文件
+    let allExist = fileArray.every(filePath => fs.existsSync(filePath));
+    if (allExist) {
+      // 创建视频列表文件
+      let inputfile = `.${courseName}${courseClass}.txt`;
+      fs.writeFileSync(inputfile, fileList, "utf8");
+      spawnSync("ls", ["-a"], { stdio: "inherit" });
+      // 使用 ffmpeg 合并视频
+      let outfile = `${downloadDirectory}/${courseName}${courseClass}.mp4`;
+      spawnSync("ffmpeg", ["-f", "concat", "-safe", 0, "-i", inputfile, "-c", "copy", outfile], { stdio: 'inherit' });
+      // 删除文件
+      for (let url of data[courseClass]) {
+        if (url) {
+          let index = data[courseClass].indexOf(url) + 1;
+          let fileName = `${courseName}${courseClass}-${index}.mp4`;
+          fs.unlinkSync(`${downloadDirectory}/${fileName}`);
+        }
+      }
+      fs.unlinkSync(inputfile);
     }
   }
 }
