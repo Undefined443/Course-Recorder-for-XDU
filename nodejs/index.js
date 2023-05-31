@@ -399,6 +399,14 @@ function download(file, courseID) {
     let fileArray = [];
     let fileList = "";
     let downloadDirectory = `${os.homedir()}/Downloads`;
+    let outfile = `${downloadDirectory}/${courseName}${courseClass}.mp4`;
+    if (fs.existsSync(outfile)) {
+      console.log("==> " + "Warning\n".yellow + "\tFile exists: " + outfile);
+      let ans = readlineSync.question("==> " + "Do you want to overwrite it? [y/N]\n");
+      if (!((ans === "y") || (ans === "Y"))) {
+        process.exit(1);
+      }
+    }
     for (let url of data[courseClass]) {
       if (url) {
         let index = data[courseClass].indexOf(url) + 1;
@@ -416,7 +424,6 @@ function download(file, courseID) {
       fs.writeFileSync(inputfile, fileList, "utf8");
       // 使用 ffmpeg 合并视频
       console.log("==> " + "Merging videos...".green);
-      let outfile = `${downloadDirectory}/${courseName}${courseClass}.mp4`;
       let child = spawnSync("ffmpeg", ["-f", "concat", "-safe", 0, "-i", inputfile, "-c", "copy", outfile, "-y"]);
       if (child.status !== 0) {  // 判断子进程返回值
         console.log("==> " + "Error\n".red + "\t" + child.stderr.toString());  // 合并失败，报错
